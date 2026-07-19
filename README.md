@@ -1,0 +1,29 @@
+# Chat Application
+
+A full-stack real-time chat application built using the MERN stack.
+
+## 🚀 Features
+
+- User Authentication
+- Real-time Messaging
+- Profile Management
+- Responsive UI
+- Secure Backend APIs
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React
+- Vite
+- Tailwind CSS
+- DaisyUI
+- Axios
+- React Router
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Cloudinary
