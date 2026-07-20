@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 import userRoute from "./routes/user.route.js";
 
@@ -11,6 +12,7 @@ const app = express();
 dotenv.config();
 
  app.use(express.json());
+ app.use(cookieParser());
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
