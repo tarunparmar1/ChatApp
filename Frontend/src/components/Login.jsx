@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
             password:data.password,
             confirmpassword:data.confirmpassword
         }
-       await axios.post("http://localhost:3000/user/login",userInfo)
+       await axios.post("/api/user/login",userInfo)
             .then((response) => {
                 if(response.data)
                 {

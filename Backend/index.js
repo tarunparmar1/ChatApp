@@ -31,7 +31,7 @@ app.get("/", (req,res) => {
     res.send("start server hello")
 });
 
-app.use("/user",userRoute);
+app.use("/api/user",userRoute);
 
 app.listen(PORT,() =>{
     console.log(`app listion on port ${PORT} link http://localhost:${PORT}/`)

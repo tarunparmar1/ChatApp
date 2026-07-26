@@ -25,7 +25,7 @@ function Signup() {
             password:data.password,
             confirmpassword:data.confirmpassword
         }
-       await axios.post("http://localhost:3000/user/signup",userInfo)
+       await axios.post("/api/user/signup",userInfo)
             .then((response) => {
                 if(response.data)
                 {
