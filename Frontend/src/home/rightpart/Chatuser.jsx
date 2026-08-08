@@ -12,7 +12,7 @@ function Chatuser() {
             </div>
             <div className="text-white">
                 <h1 className="text-xl ">
-                    {selectedConversation.fullname}
+                    {selectedConversation?.fullname || "Select a user"}
                 </h1>
                 <span className="text-sm">
                     offline 
