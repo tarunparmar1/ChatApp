@@ -4,10 +4,12 @@ import Loading from '../../components/Loading'
 import useGetMessage from '../../context/useGetMessage'
 import User from '../leftpart/User'
 import useConversation from "../../zustand/userConversation.js"
+import useSocketGetMessage from '../../context/useSocketGetMessage.js'
 
 function Messeges() {
     const { loading, messages } = useGetMessage();
     const { selectedConversation } = useConversation();
+    useSocketGetMessage(); //listion incoming messages
 
     const lastMsgRef = useRef();
     useEffect(() => {
@@ -21,10 +23,9 @@ function Messeges() {
 
     return (
         <div className="h-[84vh] overflow-y-auto flex flex-col hide-scrollbar">
-            {loading ? (<Loading />) : (messages.map((message, index) => (
+            {loading ? (<Loading />) : (messages.map((message,index) => (
                 <div
-                    key={message?._id || index}
-                    ref={index === messages.length - 1 ? lastMsgRef : null}
+                    key={message?._id||index} ref={lastMsgRef}
                 >
                     <Messege message={message} />
                 </div>

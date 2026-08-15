@@ -46,11 +46,11 @@ import createTokenAndSaveCookie from "../jwt/generateToken.js"
         try {
             const user= await User.findOne({email})
             if(!user){
-                  res.status(400).json({error:"Invalid user  Email id"});
+                 return res.status(400).json({error:"Invalid user  Email id"});
             }
             const isMatch = await bcrypt.compare(password,user.password)
             if(!isMatch){
-                  res.status(400).json({error:"Invalid password"});
+                return res.status(400).json({error:"Invalid password"});
             }
             createTokenAndSaveCookie(user._id,res);
             res.status(201).json({
@@ -77,12 +77,27 @@ import createTokenAndSaveCookie from "../jwt/generateToken.js"
   }
     };
 
-    export const allUsers =async(req,res) =>{
-        try {
-            const loggedInUser=req.user._id;
-            const filteredUsers = await User.find({_id: {$ne: loggedInUser}}).select("-password");
-             res.status(200).json(filteredUsers);
-        } catch (error) {
-            console.log("error in all users contriller" + error)
+   export const allUsers = async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({
+                error: "Unauthorized - user not found"
+            });
         }
-    };
+
+        const loggedInUser = req.user._id;
+
+        const filteredUsers = await User.find({
+            _id: { $ne: loggedInUser }
+        }).select("-password");
+
+        return res.status(200).json(filteredUsers);
+
+    } catch (error) {
+        console.log("Error in all users controller:", error);
+
+        return res.status(500).json({
+            error: "Something went wrong while getting users"
+        });
+    }
+};
