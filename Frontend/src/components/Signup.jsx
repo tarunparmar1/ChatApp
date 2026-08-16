@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/Authprovider.jsx";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import logo from "../assets/logo.png"
 
 function Signup() {
     const [authUser, setAuthUser] = useAuth()
@@ -29,27 +31,31 @@ function Signup() {
             .then((response) => {
                 if(response.data)
                 {
-                    alert("signup successful");
+                    toast.success("signup successful");
                 }
                 localStorage.setItem("chatapp",JSON.stringify(response.data));
                 setAuthUser(response.data);
             })
             .catch((error) => {
              if(error.response){
-                alert("Error:"+error.response.data.error)
+                toast.error("Error:"+error.response.data.error)
              }
             });
             
     };
     return (
         <>
-            <div className="flex h-screen items-center justify-center p-[1rem]">
+            <div className="flex h-screen items-center bg-[#12141C] justify-center p-[1rem]">
                 <form
                onSubmit={handleSubmit(onSubmit)}
-                className=" border border-white px-6 py-5 rounded-md max-w-[20rem] space-y-3 ">
-                    <h1 className="text-2xl text-center">
-                        <span className='text-blue-600'>chat app</span>
-                     </h1>
+                className=" border border-white bg-[#1A1D29] px-6 py-5 rounded-md max-w-[20rem] space-y-3 ">
+                       <div className="flex items-center justify-center">
+                         <img
+                           src={logo}
+                           alt="NexChat"
+                           className="w-32 h-32 object-contain"
+                         />
+                       </div>
                     <h1 className ="text-xl text-white">Signup</h1>
                     <br />
                     {/*full name*/}
@@ -81,25 +87,45 @@ function Signup() {
 
                  
                     {/* Email*/}
-                    <label className="input validator">
-                        <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g
-                                strokeLinejoin="round"
-                                strokeLinecap="round"
-                                strokeWidth="2.5"
-                                fill="none"
-                                stroke="currentColor"
-                            >
-                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                            </g>
-                        </svg>
-                        <input type="email" placeholder="mail@site.com" required
-                            {...register("email", { required: true })} />
-                    </label>
-                     {errors.email && (<span className="text-red-500">This field is required</span>)}
-                       <div className="validator-hint hidden">Enter valid email address</div>
+                   <label className="input validator">
+  <svg
+    className="h-[1em] opacity-50"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+    </g>
+  </svg>
 
+  <input
+    type="email"
+    placeholder="mail@site.com"
+    required
+    className="lowercase"
+    {...register("email", {
+      required: "Email is required",
+      pattern: {
+        value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+        message: "Enter a valid email address"
+      },
+      setValueAs: (value) => value.toLowerCase()
+    })}
+  />
+</label>
+
+{errors.email && (
+  <span className="text-red-500 text-sm">
+    {errors.email.message}
+  </span>
+)}
                     {/* password*/}
                     <label className="input validator">
                         <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

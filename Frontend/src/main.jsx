@@ -13,6 +13,6 @@ createRoot(document.getElementById('root')).render(
       <App />
     </SocketProvider>
 
-  </AuthProvider>,
+  </AuthProvider>
     </BrowserRouter>
 )

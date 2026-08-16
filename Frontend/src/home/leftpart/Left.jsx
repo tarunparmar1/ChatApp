@@ -3,20 +3,27 @@ import Search from './Search.jsx'
 import Users from './Users.jsx'
 import Logout from './Logout.jsx'
 
-
-
 export function Left() {
   return (
-    <div className="flex flex-col w-[30%] bg-[#12141C] border border-gray-800">
-    <Search/>
+    <div className="w-full h-screen flex flex-col bg-[#12141C]">
 
-    <div className="flex-1 overflow-y-auto ">
-    <Users />
-    </div>
+      {/* Search */}
+      <div className="shrink-0">
+        <Search />
+      </div>
 
-    <Logout />
+      {/* Users */}
+      <div className="flex-1 overflow-y-auto min-h-0">
+        <Users />
+      </div>
+
+      {/* Logout */}
+      <div className="shrink-0">
+        <Logout />
+      </div>
+
     </div>
-    )
-  }
+  )
+}
 
 export default Left

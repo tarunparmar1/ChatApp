@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import useConversation from "../../zustand/userConversation";
 import useGetAllusers from "../../context/useGetAllusers.jsx";
+import toast from "react-hot-toast";
 
 function Search() {
     const [search, setSearch] = useState("");
@@ -16,16 +17,14 @@ function Search() {
         if (!search.trim()) return;
 
         const conversation = allUsers.find((user) =>
-            user.fullname
-                .toLowerCase()
-                .includes(search.toLowerCase())
+            user.fullname?.toLowerCase().includes(search.toLowerCase())
         );
 
         if (conversation) {
             setSelectedConversation(conversation);
             setSearch("");
         } else {
-            alert("User not found");
+            toast.error("User not found");
         }
     };
 
