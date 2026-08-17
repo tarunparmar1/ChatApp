@@ -6,8 +6,7 @@ A full-stack real-time chat application built using the MERN stack.
 ## 🚀 Features
 
 - User Authentication
-- Real-time Messaging
-- Profile Management
+- Real-time 
 - Responsive UI
 - Secure Backend APIs
 
