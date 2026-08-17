@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import Messege from './messege'
+import Messege from './Messege.jsx'
 import Loading from '../../components/Loading'
 import useGetMessage from '../../context/useGetMessage'
 import User from '../leftpart/User'
