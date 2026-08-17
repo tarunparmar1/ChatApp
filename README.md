@@ -19,6 +19,7 @@ A full-stack real-time chat application built using the MERN stack.
 - DaisyUI
 - Axios
 - React Router
+- Zustand
 
 ### Backend
 - Node.js
@@ -26,4 +27,5 @@ A full-stack real-time chat application built using the MERN stack.
 - MongoDB
 - Mongoose
 - JWT Authentication
-- Cloudinary
+- socket.io
+  
