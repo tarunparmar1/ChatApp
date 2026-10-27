@@ -12,9 +12,12 @@ function Users() {
     // Tab: 'all' | 'online' | 'favorites'
     const [activeTab, setActiveTab] = useState('all');
 
+    // Convert online user IDs to strings for robust matching across reloads
+    const onlineSet = new Set(onlineUsers.map(id => String(id)));
+
     const filteredUsers = () => {
         if (activeTab === 'online') {
-            return allUsers.filter((u) => onlineUsers.includes(u._id));
+            return allUsers.filter((u) => onlineSet.has(String(u._id)));
         }
         if (activeTab === 'favorites') {
             return allUsers.filter((u) => favorites.includes(u._id));
@@ -22,9 +25,11 @@ function Users() {
         return allUsers;
     };
 
+    const onlineCount = allUsers.filter((u) => onlineSet.has(String(u._id))).length;
+
     const tabs = [
         { id: 'all', label: 'All' },
-        { id: 'online', label: 'Online', count: onlineUsers.length-1},
+        { id: 'online', label: 'Online', count: onlineCount },
         { id: 'favorites', label: 'Favorites', count: favorites.length },
     ];
 

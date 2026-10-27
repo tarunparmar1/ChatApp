@@ -5,9 +5,16 @@ import { useContext } from 'react';
 export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) =>{
-    const initialUserState = Cookies.get("jwt") || localStorage.getItem("chatapp");
-    //parse user dataand storein state
-    const [authUser,setAuthUser] = useState(initialUserState? JSON.parse(initialUserState):undefined);
+    let initialUser = undefined;
+    try {
+        const stored = localStorage.getItem("chatapp");
+        if (stored) {
+            initialUser = JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error("Failed to parse auth user:", e);
+    }
+    const [authUser, setAuthUser] = useState(initialUser);
 return (
     <div>
 <AuthContext.Provider value={[authUser,setAuthUser]}>
