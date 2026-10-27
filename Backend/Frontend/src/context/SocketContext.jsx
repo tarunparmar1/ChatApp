@@ -14,17 +14,22 @@ export const SocketProvider = ({ children }) => {
     const [authUser] = useAuth();
 
     useEffect(() => {
-        if (authUser) {
+        if (authUser?.user?._id) {
             // Auto-detect: local dev vs production
+            // In production, when the frontend is served by Express or on Render,
+            // using window.location.origin connects to whatever domain the app is running on.
             const socketUrl =
-                window.location.hostname === "localhost"
+                window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
                     ? "http://localhost:8000"
-                    : "https://chatapp-obxh.onrender.com";
+                    : window.location.origin || "https://chatapp-obxh.onrender.com";
 
             const newSocket = io(socketUrl, {
-                query: { userId: authUser.user._id },
+                query: { userId: String(authUser.user._id) },
                 withCredentials: true,
                 transports: ["websocket", "polling"],
+                reconnection: true,
+                reconnectionAttempts: 10,
+                reconnectionDelay: 1000,
             });
 
             socketRef.current = newSocket;

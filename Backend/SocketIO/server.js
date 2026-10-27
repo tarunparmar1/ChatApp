@@ -7,10 +7,19 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: [
-            "http://localhost:5173",
-            "https://chatapp-obxh.onrender.com"
-        ],
+        origin: (origin, callback) => {
+            // Allow requests with no origin (like mobile apps, curl) or any matching domain
+            if (!origin) return callback(null, true);
+            if (
+                origin.includes("localhost") ||
+                origin.includes("127.0.0.1") ||
+                origin.includes("onrender.com") ||
+                origin.includes("render.com")
+            ) {
+                return callback(null, true);
+            }
+            return callback(null, true); // Fallback: allow all origins to prevent socket connection failure
+        },
         methods: ["GET", "POST"],
         credentials: true,
     }

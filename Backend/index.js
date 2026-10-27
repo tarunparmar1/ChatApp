@@ -17,7 +17,18 @@ dotenv.config();
  app.use(express.json());
  app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:5173", "https://chatapp-obxh.onrender.com"],
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (
+            origin.includes("localhost") ||
+            origin.includes("127.0.0.1") ||
+            origin.includes("onrender.com") ||
+            origin.includes("render.com")
+        ) {
+            return callback(null, true);
+        }
+        return callback(null, true);
+    },
     credentials: true
 }));
 

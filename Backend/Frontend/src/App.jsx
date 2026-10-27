@@ -61,7 +61,7 @@ function App() {
           path="/"
           element={
             authUser ? (
-              <div className="flex h-screen h-[100dvh] w-screen overflow-hidden bg-[#12141C]">
+              <div className="fixed inset-0 w-full h-full flex overflow-hidden bg-[#12141C]">
                 {/* LEFT SIDEBAR (All / Online / Favorites user list) */}
                 <aside
                   className={`
@@ -76,7 +76,7 @@ function App() {
                 <main
                   className={`
                     ${selectedConversation ? "flex" : "hidden md:flex"}
-                    flex-1 h-full flex-col min-w-0 bg-[#12141C]
+                    flex-1 h-full max-h-full flex-col min-w-0 bg-[#12141C] overflow-hidden
                   `}
                 >
                   <Right />

@@ -14,7 +14,7 @@ function Typesend() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="shrink-0 bg-[#1A1D29] border-t border-gray-800 px-3 md:px-6 py-2.5">
+        <form onSubmit={handleSubmit} className="shrink-0 bg-[#1A1D29] border-t border-gray-800 px-3 md:px-6 py-2.5 pb-safe">
             <div className="flex items-center gap-2 max-w-4xl mx-auto">
                 <input
                     type="text"

@@ -1,13 +1,25 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-html, body, #root {
+html, body {
   height: 100%;
   height: 100dvh;
+  height: -webkit-fill-available;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #12141C;
+  position: fixed;
+  width: 100%;
+  touch-action: manipulation;
+}
+
+#root {
+  height: 100%;
+  height: 100dvh;
+  height: -webkit-fill-available;
+  width: 100%;
+  overflow: hidden;
 }
 
 @layer utilities {
@@ -21,6 +33,6 @@ html, body, #root {
   }
 
   .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
   }
 }
