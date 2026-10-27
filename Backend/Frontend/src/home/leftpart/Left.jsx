@@ -5,7 +5,7 @@ import Logout from './Logout.jsx'
 
 export function Left() {
   return (
-    <div className="w-full h-full flex flex-col bg-[#12141C] overflow-hidden select-none">
+    <div className="w-full h-full max-h-full flex flex-col bg-[#12141C] overflow-hidden select-none">
       {/* Search Header */}
       <Search />
 
@@ -14,7 +14,7 @@ export function Left() {
         <Users />
       </div>
 
-      {/* Current User Profile & Logout */}
+      {/* Current User Profile & Logout (always pinned at the bottom) */}
       <Logout />
     </div>
   )

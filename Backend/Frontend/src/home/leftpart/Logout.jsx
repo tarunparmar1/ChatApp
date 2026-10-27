@@ -37,7 +37,7 @@ function Logout() {
 
     return (
         <>
-            <div className="h-16 bg-[#1A1D29] border-t border-gray-800 px-3 md:px-4 flex items-center justify-between shrink-0 shadow-sm">
+            <div className="min-h-16 h-16 pb-safe bg-[#1A1D29] border-t border-gray-800 px-3 md:px-4 flex items-center justify-between shrink-0 shadow-sm z-10">
                 {/* User avatar & info (clickable to open settings) */}
                 <div
                     onClick={() => setIsSettingsOpen(true)}

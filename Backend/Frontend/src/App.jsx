@@ -66,7 +66,7 @@ function App() {
                 <aside
                   className={`
                     ${selectedConversation ? "hidden md:flex" : "flex"}
-                    w-full md:w-[320px] lg:w-[360px] xl:w-[400px] shrink-0 h-full flex-col border-r border-gray-800/80
+                    w-full md:w-[320px] lg:w-[360px] xl:w-[400px] shrink-0 h-full max-h-full flex-col border-r border-gray-800/80 overflow-hidden
                   `}
                 >
                   <Left />
