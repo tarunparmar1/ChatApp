@@ -1,12 +1,12 @@
 # Chat Application
+link https://chatapp-obxh.onrender.com
 
 A full-stack real-time chat application built using the MERN stack.
 
 ## 🚀 Features
 
 - User Authentication
-- Real-time Messaging
-- Profile Management
+- Real-time 
 - Responsive UI
 - Secure Backend APIs
 
@@ -19,6 +19,7 @@ A full-stack real-time chat application built using the MERN stack.
 - DaisyUI
 - Axios
 - React Router
+- Zustand
 
 ### Backend
 - Node.js
@@ -26,4 +27,5 @@ A full-stack real-time chat application built using the MERN stack.
 - MongoDB
 - Mongoose
 - JWT Authentication
-- Cloudinary
+- socket.io
+  
