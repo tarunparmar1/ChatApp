@@ -10,7 +10,7 @@ Frontend/.env
 Backend/dist/
 Backend/build/
 Frontend/dist/
-
+PrivacyPolicy.jsx
 # Logs
 *.log
 npm-debug.log*

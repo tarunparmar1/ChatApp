@@ -1,43 +1,64 @@
-import { Children, useEffect,useContext } from "react";
+import { useEffect, useContext, createContext, useState, useRef } from "react";
 import { useAuth } from "./Authprovider";
 import { io } from "socket.io-client";
-import {createContext, useState} from "react";
-
 
 const socketContext = createContext();
-export const useSocketContext =() =>{
+
+export const useSocketContext = () => {
     return useContext(socketContext);
 };
 
-export const  SocketProvider = ({ children}) =>{
-    const [socket,setSocket] = useState(null);
-    const [onlineUsers,setOnlineUsers] = useState([]);
+export const SocketProvider = ({ children }) => {
+    const socketRef = useRef(null);          // stable ref so cleanup always works
+    const [onlineUsers, setOnlineUsers] = useState([]);
     const [authUser] = useAuth();
 
-    useEffect(() =>{
-        if(authUser){
-            const socket = io("https://chatapp-obxh.onrender.com",{
-                query:{
-                    userId: authUser.user._id,
-                },
+    useEffect(() => {
+        if (authUser) {
+            // Auto-detect: local dev vs production
+            const socketUrl =
+                window.location.hostname === "localhost"
+                    ? "http://localhost:8000"
+                    : "https://chatapp-obxh.onrender.com";
+
+            const newSocket = io(socketUrl, {
+                query: { userId: authUser.user._id },
+                withCredentials: true,
+                transports: ["websocket", "polling"],
             });
-            setSocket(socket);
-            socket.on("getOnlineUsers",(users) =>{
+
+            socketRef.current = newSocket;
+
+            newSocket.on("connect", () => {
+                // console.log("[Socket] connected:", newSocket.id);
+            });
+
+            newSocket.on("connect_error", (err) => {
+                console.error("[Socket] connection error:", err.message);
+            });
+
+            newSocket.on("getOnlineUsers", (users) => {
                 setOnlineUsers(users);
-            }) 
-            return() =>socket.close();
+            });
 
-        }else{
-            if(socket){
-                socket.close();
-                setSocket(null);
+            // Cleanup on unmount or authUser change
+            return () => {
+                newSocket.close();
+                socketRef.current = null;
+                setOnlineUsers([]);
+            };
+        } else {
+            // Logged out — close any existing socket
+            if (socketRef.current) {
+                socketRef.current.close();
+                socketRef.current = null;
             }
+            setOnlineUsers([]);
         }
+    }, [authUser]);
 
-    },[authUser]);
-
-    return(
-        <socketContext.Provider value={{ socket,onlineUsers}}>
+    return (
+        <socketContext.Provider value={{ socket: socketRef.current, onlineUsers }}>
             {children}
         </socketContext.Provider>
     );

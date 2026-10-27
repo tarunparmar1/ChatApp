@@ -8,28 +8,26 @@ function useSocketGetMessage() {
     const { messages, setMessage } = useConversation();
 
     useEffect(() => {
+        if (!socket) return;
+
         socket.on("newMessage", (newMessage) => {
-             const notification = new Audio(sound);
-
+            const notification = new Audio(sound);
             notification.volume = 1.0;
-
-            notification.play()
-                .then(() => {
-                    console.log("🔊 Sound played");
-                })
-                .catch((error) => {
-                    console.log("❌ Sound blocked:", error);
-                });
+            notification.play().catch((error) => {
+                console.log("Sound blocked:", error);
+            });
             setMessage([...messages, newMessage]);
-
         });
-  
-    return () => {
-        socket.off("newMessage");
-    };
-      },[socket,messages,setMessage]);
-};
 
+        socket.on("conversationDeleted", () => {
+            setMessage([]);
+        });
 
+        return () => {
+            socket.off("newMessage");
+            socket.off("conversationDeleted");
+        };
+    }, [socket, messages, setMessage]);
+}
 
-export default useSocketGetMessage
+export default useSocketGetMessage;
