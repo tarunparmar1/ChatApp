@@ -44,6 +44,17 @@ function TicTacToeModal() {
     const [winningInfo, setWinningInfo] = useState(null);
     const [scores, setScores] = useState({ player: 0, opponent: 0, draws: 0 });
 
+    // Reset full game state whenever a new game is started (activeGame changes)
+    useEffect(() => {
+        // When activeGame becomes null (no game) we keep current state; when a new game starts we clear everything.
+        if (activeGame) {
+            setBoard(Array(9).fill(null));
+            setTurn('X');
+            setWinningInfo(null);
+            setScores({ player: 0, opponent: 0, draws: 0 });
+        }
+    }, [activeGame]);
+
     const isMyTurn = (gameMode === 'bot' && turn === mySymbol) || (gameMode === 'online' && turn === mySymbol);
 
     // Reset current round
@@ -51,6 +62,10 @@ function TicTacToeModal() {
         setBoard(Array(9).fill(null));
         setTurn('X');
         setWinningInfo(null);
+        // Reset scores only for a fresh round when the user explicitly clicks "Play Again"
+        if (!notify) {
+            setScores({ player: 0, opponent: 0, draws: 0 });
+        }
         if (notify && gameMode === 'online' && socket && opponent?._id) {
             socket.emit("restartGame", { to: opponent._id });
         }
