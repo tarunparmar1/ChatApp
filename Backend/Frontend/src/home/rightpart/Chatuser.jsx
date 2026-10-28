@@ -99,19 +99,19 @@ function Chatuser() {
                         <IoGameControllerOutline className="text-xl" />
                     </button>
 
-                    <button
+                    {/* <button
                         onClick={() => setShowConfirm(true)}
                         className="p-2 rounded-xl text-gray-400 hover:text-red-400 hover:bg-red-500/10 active:scale-95 transition-all cursor-pointer"
                         title="Delete chat history"
                         aria-label="Delete chat"
                     >
                         <FiTrash2 className="text-lg" />
-                    </button>
+                    </button> */}
                 </div>
             </div>
 
             {/* Delete Chat Confirmation Modal */}
-            {showConfirm && (
+            {/* {showConfirm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
                     <div className="bg-[#1A1D29] border border-gray-800 max-w-sm w-full p-5 rounded-2xl shadow-2xl space-y-4 animate-fade-in">
                         <div className="flex items-center gap-3">
@@ -145,7 +145,7 @@ function Chatuser() {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
         </>
     );
 }

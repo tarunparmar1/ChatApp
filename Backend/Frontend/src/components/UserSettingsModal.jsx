@@ -142,23 +142,23 @@ function UserSettingsModal({ isOpen, onClose }) {
         }
     };
 
-    // Delete Chat with specific user
-    const handleDeleteChat = async (targetUser) => {
-        setIsDeletingChat(true);
-        try {
-            await axios.delete(`/api/message/delete/${targetUser._id}`);
-            if (selectedConversation?._id === targetUser._id) {
-                setMessage([]);
-            }
-            toast.success(`Chat with ${targetUser.fullname} deleted`);
-            setChatToDelete(null);
-        } catch (error) {
-            console.error("Error deleting chat:", error);
-            toast.error(error.response?.data?.error || "Failed to delete chat");
-        } finally {
-            setIsDeletingChat(false);
-        }
-    };
+    // // Delete Chat with specific user
+    // const handleDeleteChat = async (targetUser) => {
+    //     setIsDeletingChat(true);
+    //     try {
+    //         await axios.delete(`/api/message/delete/${targetUser._id}`);
+    //         if (selectedConversation?._id === targetUser._id) {
+    //             setMessage([]);
+    //         }
+    //         toast.success(`Chat with ${targetUser.fullname} deleted`);
+    //         setChatToDelete(null);
+    //     } catch (error) {
+    //         console.error("Error deleting chat:", error);
+    //         toast.error(error.response?.data?.error || "Failed to delete chat");
+    //     } finally {
+    //         setIsDeletingChat(false);
+    //     }
+    // };
 
     // Delete Account
     const handleDeleteAccount = async () => {
@@ -241,17 +241,7 @@ function UserSettingsModal({ isOpen, onClose }) {
                         Avatar Studio
                     </button>
 
-                    <button
-                        onClick={() => setActiveTab('chats')}
-                        className={`flex items-center gap-2 px-3.5 py-3 text-xs md:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
-                            activeTab === 'chats'
-                                ? 'border-indigo-500 text-indigo-400'
-                                : 'border-transparent text-gray-400 hover:text-gray-200'
-                        }`}
-                    >
-                        <FiTrash2 className="text-base" />
-                        Delete Chat
-                    </button>
+                  
 
                     <button
                         onClick={() => setActiveTab('danger')}

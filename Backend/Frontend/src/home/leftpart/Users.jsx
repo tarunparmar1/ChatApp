@@ -30,7 +30,7 @@ function Users() {
     const tabs = [
         { id: 'all', label: 'All' },
         { id: 'online', label: 'Online', count: onlineCount },
-        { id: 'favorites', label: 'Favorites', count: favorites.length },
+        { id: 'favorites', label: 'Favorites', count: favorites.length -1},
     ];
 
     const users = filteredUsers();

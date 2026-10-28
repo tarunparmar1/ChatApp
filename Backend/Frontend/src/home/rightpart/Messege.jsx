@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import MessageDeleteMenu from '../../components/MessageDeleteMenu';
+import { deleteMessage as apiDeleteMessage } from '../../api/messageApi';
+import { useSocketContext } from '../../context/SocketContext';
 
 function Messege({ message }) {
     const authUser = JSON.parse(localStorage.getItem("chatapp"));
@@ -16,7 +19,28 @@ function Messege({ message }) {
         hour: '2-digit',
         minute: '2-digit'
     });
+    const [hidden, setHidden] = useState(false);
+    const { socket } = useSocketContext();
 
+    const handleDelete = async (type) => {
+        try {
+            await apiDeleteMessage(message._id, type);
+            if (type === 'forMe') setHidden(true);
+        } catch (e) {
+            console.error('Delete error', e);
+        }
+    };
+
+    useEffect(() => {
+        if (!socket) return;
+        const listener = ({ messageId, deleteType }) => {
+            if (messageId !== message._id) return;
+            if (deleteType === 'forEveryone') setHidden(true);
+        };
+        socket.on('messageDeleted', listener);
+        return () => socket.off('messageDeleted', listener);
+    }, [socket, message._id]);
+    if (hidden) return null;
     return (
         <div className="px-1">
             <div className={`chat ${chatname}`}>
@@ -27,6 +51,12 @@ function Messege({ message }) {
                     {formattedTime}
                 </div>
             </div>
+            {itsMe && (
+                <MessageDeleteMenu
+                    onDeleteForMe={() => handleDelete('forMe')}
+                    onDeleteForEveryone={() => handleDelete('forEveryone')}
+                />
+            )}
         </div>
     );
 }
