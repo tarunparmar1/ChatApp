@@ -4,6 +4,8 @@ import useConversation from '../zustand/userConversation';
 import { useSocketContext } from '../context/SocketContext';
 import { useAuth } from '../context/Authprovider';
 import PixelAvatar from './PixelAvatar';
+import { GiTank } from "react-icons/gi";
+
 import toast from 'react-hot-toast';
 import {
     FiX,
@@ -50,7 +52,7 @@ function GameCenterModal() {
         } else {
             startBotGame(gameType, { fullname: `${selectedConversation.fullname} (Bot)` });
             toast(`${selectedConversation.fullname} is offline. Starting ${title} in Bot mode!`, {
-                icon: "🤖",
+                icon: <FiCpu />,
             });
         }
     };
@@ -117,7 +119,7 @@ function GameCenterModal() {
                         <div className="flex items-start justify-between gap-3 mb-3">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500/20 to-red-500/20 border border-amber-500/30 flex items-center justify-center text-2xl font-black">
-                                    🪖💥
+                                   <GiTank />
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2">
@@ -136,17 +138,19 @@ function GameCenterModal() {
                         </div>
 
                         <div className="flex items-center gap-2 pt-1">
-                            <button
-                                type="button"
-                                onClick={() => handleChallengeFriend('tankduel')}
-                                className="flex-1 py-2 px-3 rounded-xl bg-amber-500  hover:from-amber-600 hover:to-red-700 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
-                            >
-                                <FiZap /> Play Tank Duel vs {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
-                            </button>
+                            {selectedConversation && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleChallengeFriend('tankduel')}
+                                    className="flex-1 py-2 px-3 rounded-xl bg-[#8b5cf6] hover:from-amber-600 hover:to-red-700 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+                                >
+                                    <FiZap /> Play Tank Duel vs {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
+                                </button>
+                            )}
                             <button
                                 type="button"
                                 onClick={() => handlePlayBot('tankduel')}
-                                className="py-2 px-3 rounded-xl bg-[#252836] hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
+                                className="py-2 px-3 rounded-xl bg-red-700 hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
                                 title="Play vs Bot"
                             >
                                 <FiCpu className="text-amber-400" /> vs Bot
@@ -158,8 +162,8 @@ function GameCenterModal() {
                     <div className="p-4 rounded-2xl bg-[#12141C] border border-gray-800 hover:border-rose-500/50 transition-all group">
                         <div className="flex items-start justify-between gap-3 mb-3">
                             <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-2xl font-black text-rose-400">
-                                    🔴🟡
+                                <div className="w-12 h-12 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-lg font-black text-rose-400">
+                                    🔴<br></br>🟡
                                 </div>
                                 <div>
                                     <h4 className="text-sm font-bold text-white group-hover:text-rose-400 transition-colors">
@@ -176,17 +180,19 @@ function GameCenterModal() {
                         </div>
 
                         <div className="flex items-center gap-2 pt-1">
-                            <button
-                                type="button"
-                                onClick={() => handleChallengeFriend('connect4')}
-                                className="flex-1 py-2 px-3 rounded-xl bg-red-500 hover:from-rose-600 hover:to-amber-600 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
-                            >
-                                <FiZap /> Challenge {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
-                            </button>
+                            {selectedConversation && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleChallengeFriend('connect4')}
+                                    className="flex-1 py-2 px-3 rounded-xl bg-[#8b5cf6] hover:from-rose-600 hover:to-amber-600 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+                                >
+                                    <FiZap /> Challenge {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
+                                </button>
+                            )}
                             <button
                                 type="button"
                                 onClick={() => handlePlayBot('connect4')}
-                                className="py-2 px-3 rounded-xl bg-[#252836] hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
+                                className="py-2 px-3 rounded-xl bg-red-700 hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
                                 title="Play vs Bot"
                             >
                                 <FiCpu className="text-rose-400" /> vs Bot
@@ -216,17 +222,19 @@ function GameCenterModal() {
                         </div>
 
                         <div className="flex items-center gap-2 pt-1">
-                            <button
-                                type="button"
-                                onClick={() => handleChallengeFriend('tictactoe')}
-                                className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
-                            >
-                                <FiUserCheck /> Challenge {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
-                            </button>
+                            {selectedConversation && (
+                                <button
+                                    type="button"
+                                    onClick={() => handleChallengeFriend('tictactoe')}
+                                    className="flex-1 py-2 px-3 rounded-xl bg-[#8b5cf6] hover:bg-indigo-600 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+                                >
+                                    <FiUserCheck /> Challenge {selectedConversation?.fullname ? selectedConversation.fullname.split(' ')[0] : 'Friend'}
+                                </button>
+                            )}
                             <button
                                 type="button"
                                 onClick={() => handlePlayBot('tictactoe')}
-                                className="py-2 px-3 rounded-xl bg-[#252836] hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
+                                className="py-2 px-3 rounded-xl bg-red-700 hover:bg-[#2d3142] text-gray-300 text-xs font-semibold transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
                                 title="Play vs Bot"
                             >
                                 <FiCpu className="text-indigo-400" /> vs Bot

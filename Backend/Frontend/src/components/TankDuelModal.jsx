@@ -3,6 +3,7 @@ import useGameStore from '../zustand/useGameStore';
 import { useSocketContext } from '../context/SocketContext';
 import { useAuth } from '../context/Authprovider';
 import PixelAvatar from './PixelAvatar';
+import { RiRobot3Fill } from "react-icons/ri";
 import toast from 'react-hot-toast';
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
@@ -960,7 +961,7 @@ function TankDuelModal() {
                         </div>
                         {gameMode === 'bot' ? (
                             <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-rose-600 to-amber-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
-                                🤖
+                               <RiRobot3Fill />
                             </div>
                         ) : (
                             <PixelAvatar

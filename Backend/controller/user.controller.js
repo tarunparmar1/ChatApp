@@ -33,9 +33,10 @@ export const signup = async (req, res) => {
         await newUser.save();
 
         if (newUser) {
-            createTokenAndSaveCookie(newUser._id, res);
+            const token = createTokenAndSaveCookie(newUser._id, res);
             res.status(201).json({
                 message: "user created successfully",
+                token,
                 user: {
                     _id:       newUser._id,
                     fullname:  newUser.fullname,
@@ -71,9 +72,10 @@ export const login = async (req, res) => {
             await user.save();
         }
 
-        createTokenAndSaveCookie(user._id, res);
+        const token = createTokenAndSaveCookie(user._id, res);
         res.status(201).json({
             message: "User logged in successfully",
+            token,
             user: {
                 _id:       user._id,
                 fullname:  user.fullname,
@@ -84,8 +86,8 @@ export const login = async (req, res) => {
             },
         });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "somthing went wrong while login user" });
+        console.error("Error in login controller:", error);
+        res.status(500).json({ error: error.message || "Something went wrong while login user" });
     }
 };
 

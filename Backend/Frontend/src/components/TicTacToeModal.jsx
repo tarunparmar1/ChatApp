@@ -3,6 +3,7 @@ import { useSocketContext } from '../context/SocketContext';
 import { useAuth } from '../context/Authprovider';
 import useGameStore from '../zustand/useGameStore';
 import PixelAvatar from './PixelAvatar';
+import { RiRobot3Fill } from "react-icons/ri";
 import toast from 'react-hot-toast';
 import {
     FiX,
@@ -266,7 +267,7 @@ function TicTacToeModal() {
                         </div>
                         {gameMode === 'bot' ? (
                             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shadow-sm">
-                                🤖
+                                <RiRobot3Fill />
                             </div>
                         ) : (
                             <PixelAvatar

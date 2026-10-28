@@ -25,16 +25,24 @@ const io = new Server(server, {
     }
 });
 
-// Real time message & game socket mapping
+// Real time message & game socket mapping (supports multiple devices/tabs per user)
+const users = {}; // { [userId]: Set of socketIds }
+
 export const getReceiverSocketId = (receiverId) => {
-    return users[receiverId];
+    const socketSet = users[receiverId];
+    if (socketSet && socketSet.size > 0) {
+        return Array.from(socketSet)[0];
+    }
+    return null;
 };
-const users = {};
 
 io.on("connection", (socket) => {
     const userId = socket.handshake.query.userId;
-    if (userId) {
-        users[userId] = socket.id;
+    if (userId && userId !== "undefined") {
+        if (!users[userId]) {
+            users[userId] = new Set();
+        }
+        users[userId].add(socket.id);
     }
 
     io.emit("getOnlineUsers", Object.keys(users));
@@ -86,7 +94,12 @@ io.on("connection", (socket) => {
     // ─────────────────────────────────────────────────────────────────────────
 
     socket.on("disconnect", () => {
-        delete users[userId];
+        if (userId && users[userId]) {
+            users[userId].delete(socket.id);
+            if (users[userId].size === 0) {
+                delete users[userId];
+            }
+        }
         io.emit("getOnlineUsers", Object.keys(users));
     });
 });
