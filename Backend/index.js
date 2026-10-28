@@ -1,4 +1,5 @@
-import express from "express"
+import express from "express"; import helmet from "helmet"; import rateLimit from "express-rate-limit"; import { body, param, validationResult } from "express-validator";
+// duplicate helmet import removed
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from "cors"
@@ -31,6 +32,64 @@ app.use(cors({
     },
     credentials: true
 }));
+
+// Security headers via Helmet
+const isProduction = process.env.NODE_ENV === "production";
+
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+
+                scriptSrc: ["'self'"],
+
+                styleSrc: [
+                    "'self'",
+                    "'unsafe-inline'",
+                    "https://fonts.googleapis.com",
+                ],
+
+                imgSrc: [
+                    "'self'",
+                    "data:",
+                    "blob:",
+                    "https://res.cloudinary.com",
+                ],
+
+                fontSrc: [
+                    "'self'",
+                    "https://fonts.gstatic.com",
+                ],
+
+                connectSrc: isProduction
+                    ? [
+                          "'self'",
+                          "https://chatapp-obxh.onrender.com",
+                          "wss://chatapp-obxh.onrender.com",
+                      ]
+                    : [
+                          "'self'",
+                          "http://localhost:3000",
+                          "ws://localhost:3000",
+                      ],
+
+                objectSrc: ["'none'"],
+                baseUri: ["'self'"],
+                frameAncestors: ["'none'"],
+                formAction: ["'self'"],
+            },
+        },
+
+        frameguard: {
+            action: "deny",
+        },
+
+        referrerPolicy: {
+            policy: "strict-origin-when-cross-origin",
+        },
+    })
+);
 
 const PORT = process.env.PORT || 5000;
 const URI = process.env.MONGODB_URI;

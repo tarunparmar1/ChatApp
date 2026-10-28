@@ -8,7 +8,7 @@ function Messege({ message }) {
     const itsMe = message.senderId === authUser?.user?._id;
     const chatname = itsMe ? "chat-end" : "chat-start";
     const chatColor = itsMe
-        ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+        ? "bg-[#8b5cf6] text-white"
         : "bg-[#252836] text-gray-200 border border-gray-700/40";
 
     const createdAt = new Date(message.createdAt);
