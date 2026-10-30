@@ -73,7 +73,7 @@ function Users() {
                                 fontWeight: '700',
                                 lineHeight: '1.4',
                             }}>
-                                {tab.count}
+                                {tab.count-1}
                             </span>
                         )}
                     </button>
