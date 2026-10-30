@@ -168,7 +168,7 @@ function UserSettingsModal({ isOpen, onClose }) {
         }
         setIsDeletingAccount(true);
         try {
-            await axios.delete("/api/user/delete-account");
+            await axios.delete("/api/user/account");
             localStorage.removeItem("chatapp");
             localStorage.removeItem("chatapp_favorites");
             Cookies.remove("jwt");
