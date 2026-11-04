@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
     },
     bio: {
         type: String,
-        default: "Hey there! I am using NexChat.",
+        default: "Hey there! I am using NextChat.",
     },
     avatar: {
         type: avatarSchema,
