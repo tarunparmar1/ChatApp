@@ -112,9 +112,7 @@ function PrivacyPolicy() {
                                     <li>Maintain the application's functionality.</li>
                                     <li>Identify technical problems and help prevent misuse.</li>
                                 </ul>
-                                <p className="pt-1 text-gray-400 text-xs">
-                                    We do not need your information for advertising purposes to demonstrate the application's core functionality.
-                                </p>
+                              
                             </div>
 
                             {/* Section 4 */}
@@ -153,7 +151,7 @@ function PrivacyPolicy() {
                                 </p>
                                 <p>The actual providers used by this application include:</p>
                                 <ul className="list-disc list-inside space-y-1 pl-2 text-gray-300">
-                                    <li><strong className="text-gray-100">Frontend Hosting:</strong> Render / Netlify / Vercel</li>
+                                    <li><strong className="text-gray-100">Frontend Hosting:</strong> Render</li>
                                     <li><strong className="text-gray-100">Backend Hosting:</strong> Render</li>
                                     <li><strong className="text-gray-100">Database:</strong> MongoDB Atlas</li>
                                     <li><strong className="text-gray-100">Image Storage:</strong> Local SVG Pixel Generator</li>
@@ -229,9 +227,7 @@ function PrivacyPolicy() {
                                 <h3 className="text-base font-bold text-white">
                                     10. Contact Us
                                 </h3>
-                                <p>
-                                    If you have questions about this Privacy Policy or wish to submit a privacy-related request, contact:
-                                </p>
+                               
                                 <div className="p-4 rounded-xl bg-[#12141C] border border-gray-800 text-xs space-y-1">
                                     <p><strong className="text-gray-300">Project:</strong> NexChat Application</p>
                                     <p><strong className="text-gray-300">Developer:</strong> Tarun</p>

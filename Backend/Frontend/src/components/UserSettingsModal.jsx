@@ -331,7 +331,7 @@ function UserSettingsModal({ isOpen, onClose }) {
                                 <button
                                     type="submit"
                                     disabled={isSavingProfile}
-                                    className="w-full md:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-sm shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                                    className="w-full md:w-auto px-6 py-2.5 rounded-xl bg-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-sm shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2"
                                 >
                                     {isSavingProfile ? (
                                         "Saving..."

@@ -70,7 +70,7 @@ function GameCenterModal() {
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 bg-[#12141C]/80 shrink-0">
                     <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white shadow-md">
+                        <div className="p-2 rounded-xl bg-purple-600 text-white shadow-md">
                             <IoGameControllerOutline className="text-xl" />
                         </div>
                         <div>

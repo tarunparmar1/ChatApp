@@ -343,7 +343,7 @@ function Connect4Modal() {
                             </span>
                         </div>
                         {gameMode === 'bot' ? (
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shadow-sm">
+                            <div className="w-8 h-8 rounded-full bg-purple-600  flex items-center justify-center text-white text-sm font-bold shadow-sm">
                                 <RiRobot3Fill />
                             </div>
                         ) : (

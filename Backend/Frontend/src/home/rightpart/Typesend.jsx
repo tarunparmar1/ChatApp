@@ -28,7 +28,7 @@ function Typesend() {
                     disabled={loading || !message.trim()}
                     className={`p-2.5 rounded-xl flex items-center justify-center transition-all ${
                         message.trim() && !loading
-                            ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-md active:scale-95 cursor-pointer"
+                            ? "bg-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-md active:scale-95 cursor-pointer"
                             : "bg-gray-800 text-gray-500 cursor-not-allowed opacity-60"
                     }`}
                     title="Send message"

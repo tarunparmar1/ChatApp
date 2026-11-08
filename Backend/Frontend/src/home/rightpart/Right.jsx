@@ -40,7 +40,7 @@ const NoChatSelected = () => {
         />
       </div>
       <h1 className="text-gray-300 text-lg md:text-xl font-medium leading-relaxed max-w-md">
-        Welcome, <span className="font-bold text-white bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">{authUser?.user?.fullname || "Friend"}</span>!
+        Welcome, <span className="font-bold text-white bg-purple-400 bg-clip-text text-transparent">{authUser?.user?.fullname || "Friend"}</span>!
         <br />
         <span className="text-gray-400 text-sm mt-2 block font-normal">
           Select a contact from the list on the left to start a conversation.
